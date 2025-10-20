@@ -1,5 +1,15 @@
+<app-example></app-example>
+
 <p>İsim: {{name}}</p>
 <p>1+1</p>
 <p>{{1+1}}</p>
 
-<button class="my-btn" (click)="onClick()">Tıkla</button>
+<button [class]="dynamicClass" 
+(click)="onClick()"
+>Tıkla
+</button>
+
+<input [(ngModel)]="name"/>
+
+
+<button (click)="submit()">Gönder</button>
