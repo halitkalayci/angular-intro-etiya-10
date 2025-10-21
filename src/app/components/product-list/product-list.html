@@ -1,5 +1,5 @@
-<app-product-card [product]="products[0]">
-</app-product-card>
+<app-product-card 
+*ngFor="let product of products"
+[product]="product">
 
-<app-product-card [product]="products[1]">
 </app-product-card>
