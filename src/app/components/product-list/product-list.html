@@ -1,13 +1,10 @@
-
-@if(productResponse)
-{
-    <div>{{productResponse.total}}</div>
+<div style="display: flex; flex-wrap: wrap">
+  @if(productResponse)
+  { 
+    @for(product of productResponse.products; track product.id) {
+    <div>
+        <app-product-card [product]="product"></app-product-card>
+    </div>
+  } 
 }
-@for(product of products; track product.id)
-{
-    <app-product-card [product]="product"></app-product-card>
-}
-@empty {
-    <div>Ürün bulunamadı.</div>
-}
-
+</div>
