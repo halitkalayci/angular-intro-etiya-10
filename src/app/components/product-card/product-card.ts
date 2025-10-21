@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ProductCard {
   @Input() productName:string="";
-  productPrice:number=0;
+  @Input() productPrice:number=0;
   productStock:number=0;
 }
