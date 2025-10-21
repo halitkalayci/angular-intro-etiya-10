@@ -1,4 +1,7 @@
 <div>
+@if(product.imgUrl){
+<img [src]="product.imgUrl"/>
+}
 <h1>Ürün Adı: {{product.name}}</h1>
 <h4>Fiyat: {{product.price}}</h4>
 <p>Stok: {{product.stock}}</p>    
