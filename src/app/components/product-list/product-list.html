@@ -1,4 +1,8 @@
 
+@if(productResponse)
+{
+    <div>{{productResponse.total}}</div>
+}
 @for(product of products; track product.id)
 {
     <app-product-card [product]="product"></app-product-card>
@@ -6,3 +10,4 @@
 @empty {
     <div>Ürün bulunamadı.</div>
 }
+
