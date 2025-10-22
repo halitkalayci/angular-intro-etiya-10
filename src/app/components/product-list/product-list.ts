@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { ProductCard } from '../product-card/product-card';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { ProductListResponse } from '../../models/productListResponse';
+import { ProductService } from '../../services/product-service';
 
 @Component({
   selector: 'app-product-list',
@@ -17,25 +17,15 @@ export class ProductList implements OnInit {
   productResponse = signal<ProductListResponse | undefined>(undefined);
 
   // Ctor parametreleri ekstra parametrelerle açılmak zorunda değil otomatik this. altına eklenir.
-  constructor(private httpClient:HttpClient) {}
+  constructor(private productService:ProductService) {}
 
   ngOnInit() {
     this.fetchProducts();
   }
 
   fetchProducts() {
-    this.httpClient
-        .get<ProductListResponse>("https://dummyjson.com/products")
-        .subscribe({
-          next:(response:ProductListResponse) => {
-            this.productResponse.set(response);
-          },
-          error: (err:any) => {
-            console.log("Hata alındı: ", err)
-          },
-          complete: () =>  {
-            console.log("Hata ya da cevap başarılı geldi. İstek bitti.")
-          }
-        })
+   this.productService.getProducts().subscribe({
+    next:(response) => this.productResponse.set(response)
+   })
   }
 }
