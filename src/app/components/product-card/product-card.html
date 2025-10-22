@@ -1,56 +1,40 @@
-<div class="max-w-sm mx-auto bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-  <!-- Ürün Görseli -->
+<div
+  class="max-w-sm bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col h-full"
+>
   @if(product.thumbnail){
-    <div class="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-      <img 
-        [src]="product.thumbnail" 
-        [alt]="product.title"
-        class="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-      />
-      <!-- Stok Badge -->
-      <div class="absolute top-4 right-4">
-        <span 
-          [class]="product.stock > 0 ? 'bg-green-500' : 'bg-red-500'" 
-          class="px-3 py-1 rounded-full text-white text-xs font-semibold shadow-lg"
-        >
-          {{product.stock > 0 ? product.stock + ' Adet' : 'Tükendi'}}
-        </span>
-      </div>
-    </div>
+  <img
+    class="w-full h-48 object-cover flex-shrink-0"
+    [src]="product.thumbnail"
+    alt="{{ product.title }}"
+  />
   }
-  
-  <!-- Ürün İçeriği -->
-  <div class="p-6">
-    <!-- Ürün Başlığı -->
-    <h1 class="text-2xl font-bold text-gray-900 mb-2 line-clamp-2 hover:text-blue-600 transition-colors">
-      {{product.title}}
-    </h1>
-    
-    <!-- Fiyat -->
-    <div class="mb-4">
-      <h4 class="text-3xl font-extrabold text-blue-600">
-        {{product.price | currency:'₺'}}
-      </h4>
+
+  <div class="p-6 flex flex-col flex-grow">
+    <div class="flex-grow">
+      <h3 class="text-2xl font-bold text-gray-900 mb-2">
+        {{ product.title }}
+      </h3>
+      <p class="text-xl font-semibold text-indigo-600 mb-4">
+        {{ product.price | currency : "₺" }}
+      </p>
+      <p class="text-gray-700 text-sm mb-6">
+        {{ product.description | truncate }}
+      </p>
     </div>
-    
-    <!-- Açıklama -->
-    <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-      {{product.description | truncate}}
-    </p>
-    
-    <!-- Alt Bilgiler -->
-    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-      <div class="flex items-center gap-2 text-gray-500 text-xs">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        <span>{{product.meta.createdAt | date:'dd.MM.yy'}}</span>
-      </div>
-      
-      <!-- Aksiyon Butonu -->
-      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 shadow-md hover:shadow-lg">
-        Sepete Ekle
-      </button>
+
+    <div
+      class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-200 pt-4 flex-shrink-0"
+    >
+      <p>
+        Stok:
+        <span class="font-semibold text-gray-700">{{ product.stock }}</span>
+      </p>
+      <p>
+        Tarih:
+        <span class="font-semibold text-gray-700">{{
+          product.meta.createdAt | date : "dd.MM.yy"
+        }}</span>
+      </p>
     </div>
   </div>
 </div>

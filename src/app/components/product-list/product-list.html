@@ -1,37 +1,51 @@
-<!-- Product List Container -->
-<div class="container mx-auto px-4 py-8">
-  @if(productResponse()) { 
-    <!-- Products Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      @for(product of productResponse()!.products; track product.id) {
-        <div class="transform hover:scale-105 transition-transform duration-300">
-          <app-product-card [product]="product"></app-product-card>
-        </div>
-      }
-      @empty {
-        <!-- Empty State -->
-        <div class="col-span-full flex flex-col items-center justify-center py-16">
-          <svg class="w-24 h-24 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-          </svg>
-          <h3 class="text-xl font-semibold text-gray-700 mb-2">Ürün Bulunamadı</h3>
-          <p class="text-gray-500 text-center max-w-md">
-            Herhangi bir ürün bulunamadı. Lütfen daha sonra tekrar deneyin.
-          </p>
-        </div>
-      }
-    </div>
-  }
-  @else {
-    <!-- Loading State -->
-    <div class="flex flex-col items-center justify-center py-20">
-      <div class="relative">
-        <!-- Spinner -->
-        <div class="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
-      </div>
-      <p class="mt-6 text-lg font-medium text-gray-700">Yükleniyor...</p>
-      <p class="mt-2 text-sm text-gray-500">Ürünler getiriliyor</p>
-    </div>
+<!-- 
+  Ürün Listesi Ana Konteyneri
+  - max-w-7xl: Maksimum genişliği sınırlar.
+  - mx-auto: Sayfada yatayda ortalar.
+  - px-4 sm:px-6 lg:px-8: Farklı ekran boyutları için yatayda iç boşluk (padding).
+  - py-8: Dikeyde iç boşluk.
+-->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Sinyalden gelen veriyi kontrol et -->
+  @if(productResponse()) {
+
+  <!-- 
+    Ürünlerin listelendiği responsive grid alanı.
+    productResponse().products.length > 0 kontrolü,
+    sadece ürün varsa grid'i oluşturmamızı sağlar.
+  -->
+  @if (productResponse()!.products.length > 0) {
+  <div
+    class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8"
+  >
+    <!-- 
+      Ürünler üzerinde döngü
+      Her bir 'app-product-card' otomatik olarak bir grid hücresine yerleşir.
+      İçerideki ekstra 'div' kaldırıldı, artık gerek yok.
+    -->
+    @for(product of productResponse()!.products; track product.id) {
+    <app-product-card [product]="product"></app-product-card>
+    }
+  </div>
+  } @else {
+  <!-- 
+    @empty (Boş) Durumu
+    Ürün dizisi geldiyse ama boşsa bu blok çalışır.
+  -->
+  <div
+    class="w-full h-64 flex items-center justify-center text-gray-500 text-xl font-medium"
+  >
+    Herhangi bir veri bulunamadı..
+  </div>
+  } } @else {
+  <!-- 
+    @else (Yükleniyor) Durumu
+    Sinyal 'undefined' veya 'null' ise bu blok çalışır.
+  -->
+  <div
+    class="w-full h-64 flex items-center justify-center text-gray-500 text-xl font-medium"
+  >
+    Yükleniyor..
+  </div>
   }
 </div>
-
