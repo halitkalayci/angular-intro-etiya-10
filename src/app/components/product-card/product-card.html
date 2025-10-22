@@ -4,6 +4,7 @@
 }
 <h1>Ürün Adı: {{product.title}}</h1>
 <h4>Fiyat: {{product.price | currency:'₺'}}</h4>
+<p>{{product.description | truncate}}</p>
 <p>Stok: {{product.stock}}</p>  
 <p>Tarih: {{product.meta.createdAt | date:'dd.MM.yy'}}</p>  
 </div>
