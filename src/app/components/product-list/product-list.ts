@@ -14,7 +14,7 @@ import { ProductListResponse } from '../../models/productListResponse';
 //  implements OnInit => opsiyonel ama faydalı (yazım yanlışlarına karşı.)
 export class ProductList implements OnInit {
   // Ekranda takip edilmesini istiyorum.
-  productResponse = signal<ProductListResponse |undefined>(undefined);
+  productResponse = signal<ProductListResponse | undefined>(undefined);
 
   // Ctor parametreleri ekstra parametrelerle açılmak zorunda değil otomatik this. altına eklenir.
   constructor(private httpClient:HttpClient) {}
