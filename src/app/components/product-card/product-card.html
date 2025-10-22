@@ -3,6 +3,7 @@
 <img [src]="product.thumbnail"/>
 }
 <h1>Ürün Adı: {{product.title}}</h1>
-<h4>Fiyat: {{product.price}}</h4>
-<p>Stok: {{product.stock}}</p>    
+<h4>Fiyat: {{product.price | currency:'₺'}}</h4>
+<p>Stok: {{product.stock}}</p>  
+<p>Tarih: {{product.meta.createdAt | date:'dd.MM.yy'}}</p>  
 </div>
