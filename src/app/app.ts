@@ -22,3 +22,5 @@ export class App {
     this.dynamicClass = "my-btn-clicked";
   }
 }
+
+// Sistemi tailwind ile daha derli toplu bir tasarıma geçirelim.
