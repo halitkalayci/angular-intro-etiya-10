@@ -1,10 +1,14 @@
 <div style="display: flex; flex-wrap: wrap">
-  @if(productResponse)
-  { 
-    @for(product of productResponse.products; track product.id) {
-    <div>
+  @if(productResponse) { 
+      @for(product of productResponse.products; track product.id) {
+      <div>
         <app-product-card [product]="product"></app-product-card>
-    </div>
-  } 
-}
+      </div>
+      }@empty {
+        <div>Herhangi bir veri bulunamadı..</div>
+      }
+  }
+  @else{
+    <div>Yükleniyor..</div>
+  }
 </div>
