@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { ProductCard } from '../product-card/product-card';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -9,14 +9,15 @@ import { ProductListResponse } from '../../models/productListResponse';
   imports: [CommonModule,ProductCard],
   templateUrl: './product-list.html',
   styleUrl: './product-list.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 //  implements OnInit => opsiyonel ama faydalı (yazım yanlışlarına karşı.)
 export class ProductList implements OnInit {
-  productResponse!:ProductListResponse;
+  // Ekranda takip edilmesini istiyorum.
+  productResponse = signal<ProductListResponse |undefined>(undefined);
 
   // Ctor parametreleri ekstra parametrelerle açılmak zorunda değil otomatik this. altına eklenir.
-  constructor(private httpClient:HttpClient, private changeDetector:ChangeDetectorRef) {}
+  constructor(private httpClient:HttpClient) {}
 
   ngOnInit() {
     this.fetchProducts();
@@ -27,8 +28,7 @@ export class ProductList implements OnInit {
         .get<ProductListResponse>("https://dummyjson.com/products")
         .subscribe({
           next:(response:ProductListResponse) => {
-            this.productResponse = response;
-            this.changeDetector.detectChanges()
+            this.productResponse.set(response);
           },
           error: (err:any) => {
             console.log("Hata alındı: ", err)
