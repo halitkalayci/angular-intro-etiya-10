@@ -1,0 +1,19 @@
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { LoaderService } from '../services/loader-service';
+import { catchError, finalize } from 'rxjs';
+
+// Class türü interceptorler de var.
+export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
+  const loadingService = inject(LoaderService);
+  loadingService.setIsLoading(true);
+  console.log("istek başlıyor..")
+
+  // RxJs pipe
+  return next(req).pipe(
+    finalize(() => {
+      console.log("istek bitti..")
+      loadingService.setIsLoading(false);
+    })
+  );
+};

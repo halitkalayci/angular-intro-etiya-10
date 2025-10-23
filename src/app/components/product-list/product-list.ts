@@ -25,7 +25,8 @@ export class ProductList implements OnInit {
 
   fetchProducts() {
    this.productService.getProducts().subscribe({
-    next:(response) => this.productResponse.set(response)
+    next:(response) => this.productResponse.set(response),
+    complete: () => {}
    })
   }
 }
