@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +18,18 @@ export class Login implements OnInit{
 
   buildForm() {
     this.loginForm = this.formBuilder.group({
-      email: new FormControl(""),
-      password: new FormControl("")
+      email: new FormControl("", [Validators.required, Validators.email]),
+      password: new FormControl("", [Validators.required, Validators.minLength(6)])
     });
   }
-
+ 
   login() {
     console.log("form gönderildi")
+
+    if(this.loginForm.valid)
+    {
+      console.log("Validasyonlar başarılı, istek gönderiliyor...")
+    }
+
   }
 }
