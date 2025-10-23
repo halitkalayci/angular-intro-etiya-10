@@ -22,4 +22,8 @@ export class Login implements OnInit{
       password: new FormControl("")
     });
   }
+
+  login() {
+    console.log("form gönderildi")
+  }
 }
