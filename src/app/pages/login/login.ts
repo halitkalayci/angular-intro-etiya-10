@@ -33,3 +33,14 @@ export class Login implements OnInit{
 
   }
 }
+
+// Angular projesi başlatalım.
+// Tailwindcss, bootstrap, angular material vb.. bir css framework/kütüphanesi ekleyin.
+// CustomerService için ekranları tasarlamaya başlayalım.
+
+// Yalnızca customer service için.
+
+// Global http işlemleri -> interceptor (loading,auth vb..) 
+// Kullandığınız bir global formatlama varsa -> pipe
+// Olabildiğince component-bazlı tasarımlar -> (create-update customer yalnızca id değişiyor alanlar aynı.)
+// Create-Update gibi formlar ReactiveForms olmalı.
