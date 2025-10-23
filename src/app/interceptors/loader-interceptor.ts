@@ -6,14 +6,14 @@ import { catchError, finalize } from 'rxjs';
 // Class türü interceptorler de var.
 export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingService = inject(LoaderService);
-  loadingService.setIsLoading(true);
+  loadingService.addRequest();
   console.log("istek başlıyor..")
 
   // RxJs pipe
   return next(req).pipe(
     finalize(() => {
       console.log("istek bitti..")
-      loadingService.setIsLoading(false);
+      loadingService.removeRequest();
     })
   );
 };
