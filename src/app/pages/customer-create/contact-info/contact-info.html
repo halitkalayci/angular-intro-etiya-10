@@ -16,15 +16,16 @@
         <div class="h-1 w-20 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"></div>
       </div>
 
-      <form class="space-y-6">
+      <form [formGroup]="addressForm" (submit)="onSubmit()" class="space-y-6">
         <!-- Adres Kartları -->
-       
-          <div class="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-2xl p-6 relative transition-all duration-200 hover:border-blue-300 hover:shadow-md">
+       <div formArrayName="adresses">
+         @for(addressGroup of addresses.controls; track $index; let i=$index){
+           <div [formGroupName]="i" class="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-2xl p-6 relative transition-all duration-200 hover:border-blue-300 hover:shadow-md">
             <!-- Adres Numarası ve Sil Butonu -->
             <div class="flex items-center justify-between mb-6">
               <div class="flex items-center gap-3">
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
-                  1
+                  {{i+1}}
                 </span>
                 <h3 class="text-lg font-semibold text-gray-900">
                 </h3>
@@ -40,8 +41,7 @@
                 </label>
                 <input
                   type="text"
-         
-                  name="city"
+                  formControlName="city"
                   class="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-400"
                   placeholder="İstanbul"
                 />
@@ -54,17 +54,20 @@
                 </label>
                 <input
                   type="text"
-                  name="street"
+                  formControlName="street"
                   class="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-400"
                   placeholder="Atatürk Caddesi No:15"
                 />
               </div>
             </div>
-          </div>
-
+           </div>
+         }
+       </div>
+          
         <!-- Adres Ekle Butonu -->
         <button
           type="button"
+          (click)="addAddress()"
           class="w-full py-4 px-6 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 font-medium hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 flex items-center justify-center gap-2 group"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -5,7 +5,7 @@ export interface CreateCustomerModel {
     addresses?: Address[];
 }
 
-interface Address {
+export interface Address {
     city:string;
     street:string;
 }
