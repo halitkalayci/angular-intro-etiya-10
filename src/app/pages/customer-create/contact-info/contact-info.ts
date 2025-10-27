@@ -1,46 +1,27 @@
 import { Component, signal } from '@angular/core';
-
-interface Address {
-  id: number;
-  city: string;
-  street: string;
-}
+import { CustomerCreation } from '../../../services/customer-creation';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-contact-info',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './contact-info.html',
   styleUrl: './contact-info.scss'
 })
 export class ContactInfo {
- addresses = signal<Address[]>([
-    { id: 1, city: '', street: '' }
-  ]);
+  constructor(private customerCreationService:CustomerCreation){}
 
-  private nextId = 2;
-
-  addAddress(): void {
-    this.addresses.update((current:any) => [
-      ...current,
-      { id: this.nextId++, city: '', street: '' }
-    ]);
-  }
-
-  removeAddress(id: number): void {
-    if (this.addresses().length > 1) {
-      this.addresses.update((current:any) => 
-        current.filter((address:any) => address.id !== id)
-      );
+  ngOnInit() {
+    if(!this.customerCreationService.state().addresses){
+      this.customerCreationService.state().addresses = [{city:'',street:''}]
     }
   }
 
   onSubmit(): void {
-    console.log('Adresler:', this.addresses());
     // Burada router.navigate veya service çağrısı yapabilirsiniz
   }
 
   onCancel(): void {
-    console.log('İptal edildi');
     // Burada router.navigate ile geri dönebilirsiniz
   }
 }
