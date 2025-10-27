@@ -18,7 +18,7 @@
 
       <form [formGroup]="addressForm" (submit)="onSubmit()" class="space-y-6">
         <!-- Adres Kartları -->
-       <div formArrayName="adresses">
+       <div formArrayName="addresses">
          @for(addressGroup of addresses.controls; track $index; let i=$index){
            <div [formGroupName]="i" class="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-2xl p-6 relative transition-all duration-200 hover:border-blue-300 hover:shadow-md">
             <!-- Adres Numarası ve Sil Butonu -->

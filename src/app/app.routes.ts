@@ -7,6 +7,7 @@ import { authGuard } from './guards/auth-guard';
 import { CustomerCreate } from './pages/customer-create/customer-create';
 import { PersonalInfo } from './pages/customer-create/personal-info/personal-info';
 import { ContactInfo } from './pages/customer-create/contact-info/contact-info';
+import { CustomerPreviewComponent } from './pages/customer-create/preview/preview';
 
 export const routes: Routes = [
     // Parent-Child
@@ -23,7 +24,8 @@ export const routes: Routes = [
                     component: CustomerCreate,
                     children: [
                         {path: 'personal-info', component: PersonalInfo},
-                        {path:'contact-info', component: ContactInfo}
+                        {path:'contact-info', component: ContactInfo},
+                        {path:'preview', component:CustomerPreviewComponent}
                     ]
                 }
         ]

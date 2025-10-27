@@ -1,19 +1,21 @@
 import { ChangeDetectorRef, Component, signal } from '@angular/core';
 import { CustomerCreation } from '../../../services/customer-creation';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Address } from '../../../models/createCustomerModel';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contact-info',
-  imports: [RouterLink,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,RouterLink,FormsModule,ReactiveFormsModule],
   templateUrl: './contact-info.html',
   styleUrl: './contact-info.scss'
 })
 export class ContactInfo {
   addressForm!: FormGroup;
 
-  constructor(private customerCreationService:CustomerCreation, private fb:FormBuilder, private cd:ChangeDetectorRef){}
+  //ChangeDetectorRef'e gitmeden denenmesi gereken şey -> CommonModule
+  constructor(private customerCreationService:CustomerCreation, private fb:FormBuilder,private router:Router){}
 
   ngOnInit() {
     this.buildForm();
@@ -45,14 +47,14 @@ export class ContactInfo {
 
   addAddress(address?:Address){
     this.addresses.push(this.newAddress(address));
-    this.cd.detectChanges();
   }
 
   onSubmit(): void {
     if(this.addressForm.valid){
-      const newValue = {...this.customerCreationService.state, ...this.addressForm.value};
+      const newValue = {...this.customerCreationService.state(), ...this.addressForm.value};
       console.log(newValue)
-      this.customerCreationService.state.set(newValue)
+      this.customerCreationService.state.set(newValue);
+      this.router.navigateByUrl("/customer-create/preview")
     }
   }
 
