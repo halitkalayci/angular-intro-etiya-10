@@ -1,10 +1,11 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth-service';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const isLoggedIn: boolean = true; // JWT ile entegrasyon.
+  const authService = inject(AuthService);
 
-  if (!isLoggedIn) {
+  if (!authService.userState().isLoggedIn) {
     const router = inject(Router);
     router.navigateByUrl('/login');
 
