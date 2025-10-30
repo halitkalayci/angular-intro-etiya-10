@@ -8,7 +8,19 @@ import { UserJwtModel } from '../models/userJwtModel';
 export class AuthService {
   public userState = signal<UserState>({isLoggedIn:false});
 
-  constructor() {}
+  constructor() {
+    this.loadInitialState();
+  }
+
+  loadInitialState() {
+    const jwt = localStorage.getItem("token");
+
+    if(jwt)
+    {
+       const decodedJwt = jwtDecode<UserJwtModel>(jwt);
+       this.userState.set({isLoggedIn: true, user: {sub:decodedJwt.sub!, roles: decodedJwt.roles}})
+    }
+  }
 
   login() {
     // BFF (BackendForFrontend)
