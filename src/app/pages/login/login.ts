@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 export class Login implements OnInit{
   loginForm!:FormGroup;
 
-  constructor(private formBuilder:FormBuilder) {}
+  constructor(private formBuilder:FormBuilder, private authService:AuthService) {}
 
   ngOnInit() {
     this.buildForm();
@@ -29,6 +30,7 @@ export class Login implements OnInit{
     if(this.loginForm.valid)
     {
       console.log("Validasyonlar başarılı, istek gönderiliyor...")
+      this.authService.login();
     }
 
   }

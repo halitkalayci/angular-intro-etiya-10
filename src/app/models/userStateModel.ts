@@ -5,7 +5,6 @@ export interface UserState {
 
 // JWT'de neler dönüyor?
 export interface UserModel {
-    firstName: string;
-    lastName: string;
-    id: string;
+    sub: string;
+    roles: string[];
 }
