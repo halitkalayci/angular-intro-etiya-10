@@ -36,4 +36,9 @@ export class AuthService {
     this.userState.set({isLoggedIn: true, user: {sub:decodedJwt.sub!, roles: decodedJwt.roles}})
     console.log(this.userState());
   }
+
+  logout() {
+    this.userState.set({isLoggedIn:false, user:undefined})
+    localStorage.removeItem("token");
+  }
 }
