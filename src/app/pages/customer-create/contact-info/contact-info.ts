@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 export class ContactInfo {
   addressForm!: FormGroup;
 
+  //cities: signal<CityModel[]>
+
   //ChangeDetectorRef'e gitmeden denenmesi gereken şey -> CommonModule
   constructor(private customerCreationService:CustomerCreation, private fb:FormBuilder,private router:Router){}
 
@@ -52,7 +54,6 @@ export class ContactInfo {
   onSubmit(): void {
     if(this.addressForm.valid){
       const newValue = {...this.customerCreationService.state(), ...this.addressForm.value};
-      console.log(newValue)
       this.customerCreationService.state.set(newValue);
       this.router.navigateByUrl("/customer-create/preview")
     }

@@ -34,6 +34,7 @@ export class PersonalInfo {
     }
 
     // 2. Global state'de bu sayfayla alakalı yerleri doldurmak.
+    // {a:1,a:2,a:3}
     const newValue = {...this.customerCreationService.state(), ...this.personalInfoForm.value};
     this.customerCreationService.state.set(newValue);
 
